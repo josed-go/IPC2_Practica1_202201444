@@ -25,4 +25,6 @@ class lista_tablero:
         while actual != None:
             print("TABLERO")
             print("Filas:", actual.dato.filas, "| Columnas:", actual.dato.columnas)
+            print("Colores:")
+            actual.dato.colores.mostrar_lista()
             actual = actual.siguiente

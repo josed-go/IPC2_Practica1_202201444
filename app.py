@@ -44,7 +44,7 @@ def menu():
             func.agregar_tablero(filas, colum)
         else :
             print("** POR FAVOR SOLO INGRESA NUMEROS **")
-        menu()
+        #menu()
     elif opcion == "2":
         datos_estudiante()
         
