@@ -19,7 +19,12 @@ class funciones:
         self.agregar_piezas(lista_colors, filas_, columnas_)
         nuevo = tablero(filas_, columnas_, lista_colors)
         self.lista_tab.agregar_tablero(nuevo)
-        self.lista_tab.mostrar_lista()
+        #self.lista_tab.mostrar_lista()
+        print("")
+        print("-> GENERANDO GRAFICA DEL TABLERO...\n")
+        nombre_grafica = input("INGRESE EL NOMBRE PARA GUARDAR LA GRAFICA: ")
+        print()
+        self.lista_tab.generar_grafica(nombre_grafica)
 
     def agregar_piezas(self, lista_colors, filas_, columnas_):
         resp_ = "SI"
@@ -28,7 +33,7 @@ class funciones:
             print("## ELIGE UN COLOR ##")
             self.colores()
             color_ingresado = input(" INGRESA EL NUMERO DEL COLOR: ")
-            color_guardar, color = self.obtener_color(color_ingresado)
+            color_guardar, color, codigo_c = self.obtener_color(color_ingresado)
             
             print("TURNO DE COLOR:", color+"\n")
             print(f"INGRESA LA FILA EN DONDE QUIERES COLOCAR LA PIEZA (RANGO: 1 - {filas_})")
@@ -39,7 +44,7 @@ class funciones:
                 columna_colocar = input("->")
 
                 if self.validar_fila_columna("columna", columna_colocar, columnas_) == True:
-                    nuevo_color = colores(color_guardar, fila_colocar, columna_colocar)
+                    nuevo_color = colores(color_guardar, fila_colocar, columna_colocar, codigo_c)
                     lista_colors.agregar_color(nuevo_color)
                     self.mostrar_posicion_pieza(filas_, columnas_, color_guardar, fila_colocar, columna_colocar, lista_colors)
             else:
@@ -53,16 +58,14 @@ class funciones:
         self.llenar_lista(filas_, columnas_, lista_colors)
 
     def llenar_lista(self, filas, columnas, lista_colors):
-        for columnas_ in range(1, int(filas)+1):
-            for filas_ in range(1, int(columnas)+1):
+        for columnas_ in range(1, int(columnas)+1):
+            for filas_ in range(1, int(filas)+1):
 
-                nuevo_color = colores("null", filas_, columnas_)
+                nuevo_color = colores(" ", filas_, columnas_, "white")
                 color_existente = lista_colors.buscar_color(filas_, columnas_)
 
                 if color_existente is None:
                     lista_colors.agregar_color(nuevo_color)
-                else:
-                    print("Ya existe un color en esta posición. No se puede agregar una pieza aquí.")
 
     def mostrar_posicion_pieza(self, fila_inicial, columna_inicial, color, fila, columna, lista_colors):
         
@@ -113,15 +116,15 @@ class funciones:
 
     def obtener_color(self, color):
         if color == "1":
-            return "A", "AZUL"
+            return "A", "AZUL", "#84b6f4"
         elif color == "2":
-            return "R", "ROJO"
+            return "R", "ROJO", "#ff6961"
         elif color == "3":
-            return "V", "VERDE"
+            return "V", "VERDE", "#77dd77"
         elif color == "4":
-            return "P", "PÚRPURA" 
+            return "P", "PÚRPURA", "#b0c2f2"
         elif color == "5":
-            return "N", "NARANJA"
+            return "N", "NARANJA", "#ffda9e"
         else:
             print("DATO INGRESADO NO VALIDO")
             return False, False

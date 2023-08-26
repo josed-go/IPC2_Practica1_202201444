@@ -34,6 +34,29 @@ class lista_colores:
             actual = actual.siguiente
         return None
 
+    def generar_text_grafica(self):
+        datos = ""
+        actual = self.primero
+        contador = 1
+        datos += f"""<TR>\n<TD border="1" bgcolor="white">{contador}</TD>\n"""
+        sentinela = actual.dato.fila
+        fila_ = False
+        while actual != None:
+            if int(sentinela) != int(actual.dato.fila):
+                contador += 1
+                sentinela = actual.dato.fila
+                fila_ = False
+                datos += f"""</TR>\n<TR>\n<TD border="1" bgcolor="white">{contador}</TD>\n"""
+            if fila_ == False:
+                fila_ = True
+                datos += f"""<TD border="1" bgcolor="{actual.dato.codigo}"> </TD>\n"""
+            else:
+                datos += f"""<TD border="1" bgcolor="{actual.dato.codigo}"> </TD>\n"""
+            
+            actual = actual.siguiente
+        datos += "</TR>"
+        return datos
+
     def __iter__(self):
         self.actual = self.primero
         return self
